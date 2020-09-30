@@ -1,31 +1,31 @@
 jobs:
-  - name: dataworks-repo-template-docker-pr
+  - name: docker-tflint-pr
     plan:
-      - get: dataworks-repo-template-docker-pr
+      - get: docker-tflint-pr
         trigger: true
         version: every
-      - put: dataworks-repo-template-docker-pr
+      - put: docker-tflint-pr
         params:
-          path: dataworks-repo-template-docker-pr
+          path: docker-tflint-pr
           status: pending
         input_mapping:
-          dataworks-repo-template-docker: dataworks-repo-template-docker-pr
+          docker-tflint: docker-tflint-pr
       - .: (( inject meta.plan.terraform-bootstrap ))
         input_mapping:
-          dataworks-repo-template-docker: dataworks-repo-template-docker-pr
+          docker-tflint: docker-tflint-pr
       - .: (( inject meta.plan.terraform-plan ))
         input_mapping:
-          dataworks-repo-template-docker: dataworks-repo-template-docker-pr
+          docker-tflint: docker-tflint-pr
         params:
           TF_WORKSPACE: "management-dev"
           DETAILED_EXITCODE: ""
         on_failure:
-          put: dataworks-repo-template-docker-pr
+          put: docker-tflint-pr
           params:
-            path: dataworks-repo-template-docker-pr
+            path: docker-tflint-pr
             status: failure
         on_success:
-          put: dataworks-repo-template-docker-pr
+          put: docker-tflint-pr
           params:
-            path: dataworks-repo-template-docker-pr
+            path: docker-tflint-pr
             status: success
