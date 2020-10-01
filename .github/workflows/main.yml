@@ -9,7 +9,7 @@ on:
       - '*.md'
 
 env:
-  IMAGE_NAME: dwpdigital/docker-tflint
+  IMAGE_NAME: dwpdigital/tflint
 
 jobs:
   get-publish-version:
