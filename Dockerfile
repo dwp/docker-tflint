@@ -1,4 +1,4 @@
-FROM alpine:3.11.3
+FROM alpine:3.12.0
 
 RUN apk --no-cache add bash jq curl ca-certificates
 
